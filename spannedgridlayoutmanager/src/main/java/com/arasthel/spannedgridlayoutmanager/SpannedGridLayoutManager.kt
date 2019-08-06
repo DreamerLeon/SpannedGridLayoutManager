@@ -8,8 +8,8 @@ import android.graphics.PointF
 import android.graphics.Rect
 import android.os.Parcel
 import android.os.Parcelable
-import android.support.v7.widget.LinearSmoothScroller
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.LinearSmoothScroller
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.util.SparseArray
 import android.view.View
@@ -22,7 +22,7 @@ import android.view.View
  * @param spans How many spans does the layout have per row or column
  */
 open class SpannedGridLayoutManager(val orientation: Orientation,
-                               val spans: Int) : RecyclerView.LayoutManager() {
+                               val spans: Int) : androidx.recyclerview.widget.RecyclerView.LayoutManager() {
 
     //==============================================================================================
     //  ~ Orientation & Direction enums
@@ -179,10 +179,10 @@ open class SpannedGridLayoutManager(val orientation: Orientation,
     //  ~ Override parent
     //==============================================================================================
 
-    override fun generateDefaultLayoutParams(): RecyclerView.LayoutParams {
-        return RecyclerView.LayoutParams(
-                RecyclerView.LayoutParams.MATCH_PARENT,
-                RecyclerView.LayoutParams.WRAP_CONTENT
+    override fun generateDefaultLayoutParams(): androidx.recyclerview.widget.RecyclerView.LayoutParams {
+        return androidx.recyclerview.widget.RecyclerView.LayoutParams(
+                androidx.recyclerview.widget.RecyclerView.LayoutParams.MATCH_PARENT,
+                androidx.recyclerview.widget.RecyclerView.LayoutParams.WRAP_CONTENT
         )
     }
 
@@ -190,7 +190,7 @@ open class SpannedGridLayoutManager(val orientation: Orientation,
     //  ~ View layouting methods
     //==============================================================================================
 
-    override fun onLayoutChildren(recycler: RecyclerView.Recycler, state: RecyclerView.State) {
+    override fun onLayoutChildren(recycler: androidx.recyclerview.widget.RecyclerView.Recycler, state: androidx.recyclerview.widget.RecyclerView.State) {
 
         rectsHelper = RectsHelper(this, orientation)
 
@@ -331,7 +331,7 @@ open class SpannedGridLayoutManager(val orientation: Orientation,
     /**
      * Ask the recycler for a view, measure and layout it and add it to the layout
      */
-    protected open fun makeAndAddView(position: Int, direction: Direction, recycler: RecyclerView.Recycler): View {
+    protected open fun makeAndAddView(position: Int, direction: Direction, recycler: androidx.recyclerview.widget.RecyclerView.Recycler): View {
         val view = makeView(position, direction, recycler)
 
         if (direction == Direction.END) {
@@ -343,7 +343,7 @@ open class SpannedGridLayoutManager(val orientation: Orientation,
         return view
     }
 
-    protected open fun makeView(position: Int, direction: Direction, recycler: RecyclerView.Recycler): View {
+    protected open fun makeView(position: Int, direction: Direction, recycler: androidx.recyclerview.widget.RecyclerView.Recycler): View {
         val view = recycler.getViewForPosition(position)
         measureChild(position, view)
         layoutChild(position, view)
@@ -375,7 +375,7 @@ open class SpannedGridLayoutManager(val orientation: Orientation,
     /**
      * Recycle any views that are out of bounds
      */
-    protected open fun recycleChildrenOutOfBounds(direction: Direction, recycler: RecyclerView.Recycler) {
+    protected open fun recycleChildrenOutOfBounds(direction: Direction, recycler: androidx.recyclerview.widget.RecyclerView.Recycler) {
         if (direction == Direction.END) {
             recycleChildrenFromStart(direction, recycler)
         } else {
@@ -386,7 +386,7 @@ open class SpannedGridLayoutManager(val orientation: Orientation,
     /**
      * Recycle views from start to first visible item
      */
-    protected open fun recycleChildrenFromStart(direction: Direction, recycler: RecyclerView.Recycler) {
+    protected open fun recycleChildrenFromStart(direction: Direction, recycler: androidx.recyclerview.widget.RecyclerView.Recycler) {
         val childCount = childCount
         val start = getPaddingStartForOrientation()
 
@@ -410,7 +410,7 @@ open class SpannedGridLayoutManager(val orientation: Orientation,
     /**
      * Recycle views from end to last visible item
      */
-    protected open fun recycleChildrenFromEnd(direction: Direction, recycler: RecyclerView.Recycler) {
+    protected open fun recycleChildrenFromEnd(direction: Direction, recycler: androidx.recyclerview.widget.RecyclerView.Recycler) {
         val childCount = childCount
         val end = size + getPaddingEndForOrientation()
 
@@ -449,11 +449,11 @@ open class SpannedGridLayoutManager(val orientation: Orientation,
     //  ~ Scroll methods
     //==============================================================================================
 
-    override fun computeVerticalScrollOffset(state: RecyclerView.State): Int {
+    override fun computeVerticalScrollOffset(state: androidx.recyclerview.widget.RecyclerView.State): Int {
         return computeScrollOffset()
     }
 
-    override fun computeHorizontalScrollOffset(state: RecyclerView.State): Int {
+    override fun computeHorizontalScrollOffset(state: androidx.recyclerview.widget.RecyclerView.State): Int {
         return computeScrollOffset()
     }
 
@@ -461,19 +461,19 @@ open class SpannedGridLayoutManager(val orientation: Orientation,
         return if (childCount == 0) 0 else firstVisiblePosition
     }
 
-    override fun computeVerticalScrollExtent(state: RecyclerView.State): Int {
+    override fun computeVerticalScrollExtent(state: androidx.recyclerview.widget.RecyclerView.State): Int {
         return childCount
     }
 
-    override fun computeHorizontalScrollExtent(state: RecyclerView.State): Int {
+    override fun computeHorizontalScrollExtent(state: androidx.recyclerview.widget.RecyclerView.State): Int {
         return childCount
     }
 
-    override fun computeVerticalScrollRange(state: RecyclerView.State): Int {
+    override fun computeVerticalScrollRange(state: androidx.recyclerview.widget.RecyclerView.State): Int {
         return state.itemCount
     }
 
-    override fun computeHorizontalScrollRange(state: RecyclerView.State): Int {
+    override fun computeHorizontalScrollRange(state: androidx.recyclerview.widget.RecyclerView.State): Int {
         return state.itemCount
     }
 
@@ -485,15 +485,15 @@ open class SpannedGridLayoutManager(val orientation: Orientation,
         return orientation == Orientation.HORIZONTAL
     }
 
-    override fun scrollHorizontallyBy(dx: Int, recycler: RecyclerView.Recycler, state: RecyclerView.State): Int {
+    override fun scrollHorizontallyBy(dx: Int, recycler: androidx.recyclerview.widget.RecyclerView.Recycler, state: androidx.recyclerview.widget.RecyclerView.State): Int {
         return scrollBy(dx, recycler, state)
     }
 
-    override fun scrollVerticallyBy(dy: Int, recycler: RecyclerView.Recycler, state: RecyclerView.State): Int {
+    override fun scrollVerticallyBy(dy: Int, recycler: androidx.recyclerview.widget.RecyclerView.Recycler, state: androidx.recyclerview.widget.RecyclerView.State): Int {
         return scrollBy(dy, recycler, state)
     }
 
-    protected open fun scrollBy(delta: Int, recycler: RecyclerView.Recycler, state: RecyclerView.State): Int {
+    protected open fun scrollBy(delta: Int, recycler: androidx.recyclerview.widget.RecyclerView.Recycler, state: androidx.recyclerview.widget.RecyclerView.State): Int {
         // If there are no view or no movement, return
         if (delta == 0) {
             return 0
@@ -526,7 +526,7 @@ open class SpannedGridLayoutManager(val orientation: Orientation,
     /**
      * Scrolls distance based on orientation. Corrects distance if out of bounds.
      */
-    protected open fun scrollBy(distance: Int, state: RecyclerView.State): Int {
+    protected open fun scrollBy(distance: Int, state: androidx.recyclerview.widget.RecyclerView.State): Int {
         val paddingEndLayout = getPaddingEndForOrientation()
 
         val start = 0
@@ -563,8 +563,8 @@ open class SpannedGridLayoutManager(val orientation: Orientation,
         requestLayout()
     }
 
-    override fun smoothScrollToPosition(recyclerView: RecyclerView, state: RecyclerView.State, position: Int) {
-        val smoothScroller = object: LinearSmoothScroller(recyclerView.context) {
+    override fun smoothScrollToPosition(recyclerView: androidx.recyclerview.widget.RecyclerView, state: androidx.recyclerview.widget.RecyclerView.State, position: Int) {
+        val smoothScroller = object: androidx.recyclerview.widget.LinearSmoothScroller(recyclerView.context) {
 
             override fun computeScrollVectorForPosition(targetPosition: Int): PointF? {
                 if (childCount == 0) {
@@ -576,7 +576,7 @@ open class SpannedGridLayoutManager(val orientation: Orientation,
             }
 
             override fun getVerticalSnapPreference(): Int {
-                return LinearSmoothScroller.SNAP_TO_START
+                return androidx.recyclerview.widget.LinearSmoothScroller.SNAP_TO_START
             }
         }
 
@@ -587,7 +587,7 @@ open class SpannedGridLayoutManager(val orientation: Orientation,
     /**
      * Fills gaps on the layout, on directions [Direction.START] or [Direction.END]
      */
-    protected open fun fillGap(direction: Direction, recycler: RecyclerView.Recycler, state: RecyclerView.State) {
+    protected open fun fillGap(direction: Direction, recycler: androidx.recyclerview.widget.RecyclerView.Recycler, state: androidx.recyclerview.widget.RecyclerView.State) {
         if (direction == Direction.END) {
             fillAfter(recycler)
         } else {
@@ -599,7 +599,7 @@ open class SpannedGridLayoutManager(val orientation: Orientation,
      * Fill gaps before the current visible scroll position
      * @param recycler Recycler
      */
-    protected open fun fillBefore(recycler: RecyclerView.Recycler) {
+    protected open fun fillBefore(recycler: androidx.recyclerview.widget.RecyclerView.Recycler) {
         val currentRow = (scroll - getPaddingStartForOrientation()) / rectsHelper.itemSize
         val lastRow = (scroll + size - getPaddingStartForOrientation()) / rectsHelper.itemSize
 
@@ -617,7 +617,7 @@ open class SpannedGridLayoutManager(val orientation: Orientation,
      * Fill gaps after the current layouted views
      * @param recycler Recycler
      */
-    protected open fun fillAfter(recycler: RecyclerView.Recycler) {
+    protected open fun fillAfter(recycler: androidx.recyclerview.widget.RecyclerView.Recycler) {
         val visibleEnd = scroll + size
 
         val lastAddedRow = layoutEnd / rectsHelper.itemSize

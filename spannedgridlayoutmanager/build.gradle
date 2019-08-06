@@ -71,8 +71,8 @@ tasks.withType(Javadoc) {
 }
 
 dependencies {
-    implementation "com.android.support:recyclerview-v7:$support_library_version"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 }
 
 // Bintray Upload
